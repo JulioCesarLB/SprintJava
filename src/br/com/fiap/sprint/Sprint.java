@@ -41,7 +41,7 @@ public class Sprint {
 			}else {
 				
 				// não quebra o loop e explica para o user o porque
-				JOptionPane.showMessageDialog(null, "Você digitou algo diferente de um número em: "+distanciaStr+"\n TENTE NOVAMENTE!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Você digitou algo diferente de um número em: "+distanciaStr+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}while(verific==false);
