@@ -32,89 +32,85 @@ public class Sprint {
 		//
 		do {
 		
-		// Escolha da direção
-		String[] comandosVet = {"Frente","Tras","Esquerda","Direita"};
-		boolean verific = false; // boolean para o loop se o comando é possível
-		
-		// loop para verificação do comando
-		do {
-		String comando = (String) JOptionPane.showInputDialog(null,"Suas coordenadas são:"
-				+ "\n  X= "+eixoX+"     Y= "+eixoY+" "
-				+ "\n Bateria= "+bateria
-				+ "\n Escolha o comando", "Comandos",JOptionPane.INFORMATION_MESSAGE, null,comandosVet, comandosVet[0]);
-		System.out.println(comando);
-		
-	
-		// Escolha da quantidade de quadrados
-		
+			// Escolha da direção
+			String[] comandosVet = {"Frente","Tras","Esquerda","Direita"};
+			boolean verific = false; // boolean para o loop se o comando é possível
 			
-			String distanciaStr =JOptionPane.showInputDialog(null,"Suas coordenadas são:"
-					+ "\n  X= "+eixoX+"     Y= "+eixoY
-					+ "\n Bateria= "+bateria+
-					"\n Digite a distância que deseja andar","Para "+comando,JOptionPane.INFORMATION_MESSAGE);
+			// loop para verificação do comando
+			do {
+			String comando = (String) JOptionPane.showInputDialog(null,"Suas coordenadas são:"
+					+ "\n  X= "+eixoX+"     Y= "+eixoY+" "
+					+ "\n Bateria= "+bateria
+					+ "\n Escolha o comando", "Comandos",JOptionPane.INFORMATION_MESSAGE, null,comandosVet, comandosVet[0]);
+			System.out.println(comando);
 			
-			// chama o metodo e verifica se é um num memsmo
-			if(verificaNum(distanciaStr)) {
-				distancia= Integer.parseInt(distanciaStr);
+		
+			// Escolha da quantidade de quadrados
+			
 				
-				//FAZER DPS
-				// IF PARA CHAMAR O VERIFICADOR SEGUNDO O COMANDO
-				//COLOCAR OS VERIFICADORES MODIFICANDO O verific para true
+				String distanciaStr =JOptionPane.showInputDialog(null,"Suas coordenadas são:"
+						+ "\n  X= "+eixoX+"     Y= "+eixoY
+						+ "\n Bateria= "+bateria+
+						"\n Digite a distância que deseja andar","Para "+comando,JOptionPane.INFORMATION_MESSAGE);
 				
-				if(comando.equals("Frente")) {
-					if(frente(distancia)) {
-						eixoY+=distancia;
-						passos+=1;
-						verific=true;
-					}else {
-						JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(limiteY-eixoY)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
-					}
-				}else if(comando.equals("Tras")) {
-					if(tras(distancia)) {
-						eixoY-=distancia;
-						passos+=1;
-						verific=true;
-					}else {
-						JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(eixoY-limiteY)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+				// chama o metodo e verifica se é um num memsmo
+				if(verificaNum(distanciaStr)) {
+					distancia= Integer.parseInt(distanciaStr);
+					
+					if(comando.equals("Frente")) {
+						if(frente(distancia)) {
+							eixoY+=distancia;
+							passos+=1;
+							verific=true;
+						}else {
+							JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(limiteY-eixoY)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+						}
+					}else if(comando.equals("Tras")) {
+						if(tras(distancia)) {
+							eixoY-=distancia;
+							passos+=1;
+							verific=true;
+						}else {
+							JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(eixoY-limiteY)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					}else if (comando.equals("Esquerda")) {
+						if(esquerda(distancia)) {
+							eixoX-=distancia;
+							passos+=1;
+							verific=true;
+						}else {
+							JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(eixoX-limiteX)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					}else if(comando.equals("Direita")) {
+						if(direita(distancia)) {
+							eixoX+=distancia;
+							passos+=1;
+							verific=true;
+						}else {
+							JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(limiteX-eixoX)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 					
-				}else if (comando.equals("Esquerda")) {
-					if(esquerda(distancia)) {
-						eixoX-=distancia;
-						passos+=1;
-						verific=true;
-					}else {
-						JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(eixoX-limiteX)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
-					}
-					
-				}else if(comando.equals("Direita")) {
-					if(direita(distancia)) {
-						eixoX+=distancia;
-						passos+=1;
-						verific=true;
-					}else {
-						JOptionPane.showMessageDialog(null, "O distancia escolhida é acima do limite, nessa posição você poderia usar no máximo: "+(limiteX-eixoX)+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
-					}
+					 
+				}else {
+					// não quebra o loop e explica para o user o porque
+					JOptionPane.showMessageDialog(null, "Você digitou algo diferente de um número ou um número negativo em: "+distanciaStr+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 				
-				 
-			}else {
-				JOptionPane.showMessageDialog(null, "Você digitou algo diferente de um número ou um número negativo em: "+distanciaStr+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
-				// não quebra o loop e explica para o user o porque
-			}
-			
-		}while(verific==false);
+			}while(verific==false);
 		
-		//Verifica a vitória
-		if(eixoX>=20 && (eixoY>=2 && eixoY<=4)) {
-			//vitória
-			vitoria=true;
-		}else {
-			//ainda não chegou
-		}
+			//Verifica a vitória
+			if(eixoX>=20 && (eixoY>=2 && eixoY<=4)) {
+				//vitória
+				vitoria=true;
+			}else {
+				//ainda não chegou
+			}
 		}while(vitoria==false && bateria>0);
 		
-		if(bateria>=0) {
+		if(vitoria) {
 		JOptionPane.showMessageDialog(null,"Você ganhou com "+passos+" passos");}
 		else {
 			JOptionPane.showMessageDialog(null,"Sua bateria acabou na posição X= "+eixoX+" Y= "+eixoY+", sinto muito");
