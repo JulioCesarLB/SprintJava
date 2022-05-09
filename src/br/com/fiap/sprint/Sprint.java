@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class Sprint {
 	
 	
-	int eixoX=1, eixoY=15, limiteY=0, limiteX=0;
+	int eixoX=1, eixoY=15, limiteY=0, limiteX=0,bateria=-404,distancia;
 	public static void main(String[] args) {
 		Sprint sprint= new Sprint();
 			
@@ -17,6 +17,18 @@ public class Sprint {
 		
 		boolean vitoria=false;
 		int passos=0;
+		String bateriaStr;
+				
+				
+		do {
+		bateriaStr=JOptionPane.showInputDialog(null,"Digite a bateria do seu robo");
+		if(verificaNum(bateriaStr)) {
+			bateria=Integer.parseInt(bateriaStr);
+		}else {
+			JOptionPane.showMessageDialog(null, "Você digitou algo diferente de um número ou um número negativo em: "+bateriaStr+"\n TENTE NOVAMENTE! ", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+		}while(bateria==-404);
+		
 		//
 		do {
 		
@@ -28,15 +40,17 @@ public class Sprint {
 		do {
 		String comando = (String) JOptionPane.showInputDialog(null,"Suas coordenadas são:"
 				+ "\n  X= "+eixoX+"     Y= "+eixoY+" "
+				+ "\n Bateria= "+bateria
 				+ "\n Escolha o comando", "Comandos",JOptionPane.INFORMATION_MESSAGE, null,comandosVet, comandosVet[0]);
 		System.out.println(comando);
 		
 	
 		// Escolha da quantidade de quadrados
-		int distancia;
+		
 			
 			String distanciaStr =JOptionPane.showInputDialog(null,"Suas coordenadas são:"
-					+ "\n  X= "+eixoX+"     Y= "+eixoY+
+					+ "\n  X= "+eixoX+"     Y= "+eixoY
+					+ "\n Bateria= "+bateria+
 					"\n Digite a distância que deseja andar","Para "+comando,JOptionPane.INFORMATION_MESSAGE);
 			
 			// chama o metodo e verifica se é um num memsmo
@@ -98,9 +112,13 @@ public class Sprint {
 		}else {
 			//ainda não chegou
 		}
-		}while(vitoria==false);
+		}while(vitoria==false && bateria>0);
 		
-		JOptionPane.showMessageDialog(null,"Você ganhou com "+passos+" passos");
+		if(bateria>=0) {
+		JOptionPane.showMessageDialog(null,"Você ganhou com "+passos+" passos");}
+		else {
+			JOptionPane.showMessageDialog(null,"Sua bateria acabou na posição X= "+eixoX+" Y= "+eixoY+", sinto muito");
+		}
 	}
 	public boolean frente(int num) { 
 		//ATRIBUI UM LIMITE MÁXIMO PARA O Y
@@ -130,8 +148,16 @@ public class Sprint {
 			// não pode
 			return false;
 		}else {
-			return true;
+			
+			if(bateria>=num) {
+				bateria-=num;
+			}else {
+				distancia= num - (num-bateria);
+				bateria=bateria-(num+1);
+			}
+			
 			//pode
+			return true;
 		}
 	}
 	
@@ -160,6 +186,14 @@ public class Sprint {
 			// não pode
 			return false;
 		}else {
+			
+			if(bateria>=num) {
+				bateria-=num;
+			}else {
+				distancia= num - (num-bateria);
+				bateria=bateria-(num+1);
+			}
+			
 			return true;
 			//pode
 		}
@@ -187,6 +221,14 @@ public class Sprint {
 			// não pode
 			return false;
 		}else {
+			
+			if(bateria>=num) {
+				bateria-=num;
+			}else {
+				distancia= num - (num-bateria);
+				bateria=bateria-(num+1);
+			}
+	
 			return true;
 			//pode
 		}
@@ -212,6 +254,14 @@ public class Sprint {
 			// não pode
 			return false;
 		}else {
+			
+			if(bateria>=num) {
+				bateria-=num;
+			}else {
+				distancia= num - (num-bateria);
+				bateria=bateria-(num+1);
+			}
+			
 			return true;
 			//pode
 		}
