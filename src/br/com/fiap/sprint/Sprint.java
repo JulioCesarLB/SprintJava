@@ -42,7 +42,6 @@ public class Sprint {
 					+ "\n  X= "+eixoX+"     Y= "+eixoY+" "
 					+ "\n Bateria= "+bateria
 					+ "\n Escolha o comando", "Comandos",JOptionPane.INFORMATION_MESSAGE, null,comandosVet, comandosVet[0]);
-			System.out.println(comando);
 			
 		
 			// Escolha da quantidade de quadrados
